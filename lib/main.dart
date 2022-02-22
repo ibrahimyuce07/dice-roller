@@ -1,13 +1,11 @@
-import 'dart:math';
-import 'dart:typed_data';
-
 import 'package:dice_roller/dice_page.dart';
 import 'package:dice_roller/dnd_page.dart';
 import 'package:dice_roller/flip_page.dart';
 import 'package:dice_roller/rng_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() => runApp(MyApp());
 
@@ -16,7 +14,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(home: DemoApp());
+    return MaterialApp(home: DemoApp(), debugShowCheckedModeBanner: false);
   }
 }
 
@@ -34,9 +32,9 @@ class _DemoAppState extends State<DemoApp> {
 
   String _changeAppBarTitle() {
     switch(_currentIndex) {
-      case 0: return 'Dice';
-      case 1: return 'DND';
-      case 2: return 'Flip';
+      case 0: return 'Dice Roller';
+      case 1: return 'D&D Dice Roller';
+      case 2: return 'Flip Coin';
       case 3: return 'Random Number Generator';
       default: return 'Dice';
     }
@@ -44,21 +42,21 @@ class _DemoAppState extends State<DemoApp> {
 
   Color _changeAppBarColor() {
     switch(_currentIndex) {
-      case 0: return Colors.red;
-      case 1: return Colors.green;
-      case 2: return Colors.purple;
+      case 0: return Colors.deepOrange;
+      case 1: return Colors.purple;
+      case 2: return const Color(0xffffd700);
       case 3: return Colors.pink;
-      default: return Colors.red;
+      default: return Colors.deepOrange;
     }
   }
 
-  IconData? _changeAppBarIcon() {
+  IconData? _changeAppBarFAIcon() {
     switch(_currentIndex) {
-      case 0: return Icons.ac_unit;
-      case 1: return Icons.work;
-      case 2: return Icons.flip;
-      case 3: return CupertinoIcons.textformat_123;
-      default: return Icons.workspaces_filled;
+      case 0: return FontAwesomeIcons.dice;
+      case 1: return FontAwesomeIcons.diceD20;
+      case 2: return FontAwesomeIcons.yinYang;
+      case 3: return FontAwesomeIcons.robot;
+      default: return FontAwesomeIcons.dice;
     }
   }
 
@@ -69,7 +67,6 @@ class _DemoAppState extends State<DemoApp> {
     super.initState();
     _loadScreen();
     setState() {
-      print('refreshing');
     }
   }
 
@@ -84,14 +81,26 @@ class _DemoAppState extends State<DemoApp> {
 
   @override
   Widget build(BuildContext context) {
-    var diceColor = Colors.red;
+    var diceColor = Colors.deepOrange;
 
     return Scaffold(
       appBar: AppBar(
         backgroundColor: _changeAppBarColor(),
-        title: Text(_changeAppBarTitle()),
+        title: FittedBox(
+          child: Text(_changeAppBarTitle(),
+            style: GoogleFonts.exo2(
+              textStyle: TextStyle(fontSize: MediaQuery.of(context).size.width * 0.07,
+                color: const Color(0xff202124),
+              )
+            ) ,
+          ),
+        ),
         leading: IconButton(
-          icon: Icon(_changeAppBarIcon()),
+          icon: FaIcon(_changeAppBarFAIcon(),
+            color: const Color(0xff202124),
+            size: MediaQuery.of(context).size.width * 0.1,
+
+          ),
           onPressed: () {
 
           },
@@ -118,14 +127,14 @@ class _DemoAppState extends State<DemoApp> {
           BottomNavigationBarItem(
             icon: Image.asset('images/icons/dndicon64.png'),
             label: '',
-            backgroundColor: Colors.green,
+            backgroundColor: Colors.purple,
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
               'images/icons/flipco.png',
             ),
             label: '',
-            backgroundColor: Colors.purple,
+            backgroundColor: const Color(0xffffd700),
           ),
           BottomNavigationBarItem(
             icon: Image.asset(
@@ -138,6 +147,8 @@ class _DemoAppState extends State<DemoApp> {
       ),
     );
   }
+
+
 
 
 
