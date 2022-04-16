@@ -1,9 +1,0 @@
-dice roller:
-menu:
-bottom navbar:
-1. Roll dice: default 6 sides and 2 roll but changeable
-2. DND roll dice: specify number of dice and sides
-3. random number generator: default 1-100 but changeable
-4. flip coin: default 2 sides
-
-roll dice animation: animation of rolling dice
